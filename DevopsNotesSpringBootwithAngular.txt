@@ -1,0 +1,121 @@
+
+
+//// Deployment SpringBoot with Angular   Steps To follow //////
+1.create a RDS and add endpoint and credentials in application.properties    and to more visibility create a instance of rds in MySQL work bench.
+2.2)build a jar file of project of Backend
+3.3) create a EC2 instance login  to EC2 using the Mobxtream (app).
+4.4)Install Java and Maven on the Ec2
+5) create a folder -> navigate to the folder (using CD command )and -> drag and drop  jar file in that
+6) run the jar file using moup commad.
+for FrontEnd -> 7) Copy the Public of the Ec2 instance and replace local host with the Ip address in the front end.
+8) build the front end using npm run build you get  dist file when you build the project.
+9) In ec2 instace install ngnix or httpd  when you install ngnix or httpd  go to the folder /var/www/html.
+10)drop and drop all the dist file and foler in the html.
+11) mention all the ports like backend port and front port in the ec2 ->security group ->edit in bound rules ->add group  (mention port no, select any where fron Ipv4 ) and click on add
+12) copy the pubic ip of ec2 and check it in the browser.
+
+
+1.create a RDS and add endpoint and credentials in application.properties    and to more visibility create a instance of rds in MySQL work bench.
+
+A. 1 step refrence video .https://youtu.be/gCTOitR31Eg?si=RCyZ_uQ7T7elUj3m.
+2.2)build a jar file of project of Backend
+
+A. step create a  build file in backend .
+
+3.3) create a EC2 instance login  to EC2 using the Mobxtream (app).
+
+A. refrence video https://youtu.be/9Gxt8iklOio?si=EflDL4xh8uZMR3ch.
+
+
+//4 .4)Install Java and Maven on the Ec2
+A.
+sudo apt update
+sudo apt install fontconfig openjdk-17-jre
+java -version
+sudo apt install maven -y.
+//5) create a folder -> navigate to the folder (using CD command )and -> drag and drop  jar file in that  and 6) run the jar file using moup commad.
+A.
+create a folder in mobaxstream mkdir foldername.
+nohup java -jar your-application.jar > output.log 2>&1 &.
+
+
+for FrontEnd -> 7) Copy the Public of the Ec2 instance and replace local host with the Ip address in the front end.
+
+A.replace the local host in envirolnment file  with the Ec2 instance Public IPv4 address.
+
+
+8) build the front end using npm run build you get  dist file when you build the project.
+A.command npm run build. some times need to change the  production buget in chnage to  in angular.json file  "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "3mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "2mb"
+                }
+              ],
+			  
+			  
+			  Add the ports in the security group
+			  
+			  
+9) In ec2 instace install ngnix or httpd  when you install ngnix or httpd  go to the folder /var/www/html.
+A.install the this commands in mobaxstream
+
+1.sudo apt install httpd
+
+if you get error like this 
+home/ubuntu
+ubuntu@ip-172-31-52-210:~$ sudo apt install httpd
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Package httpd is a virtual package provided by:
+  apache2 2.4.58-1ubuntu8.1
+  yaws 2.1.1+dfsg-2
+  webfs 1.21+ds1-12build3
+  tntnet 3.0-3.1build1
+  mini-httpd 1.30-8build2
+  micro-httpd 20140814-2.1
+  merecat 2.31+git20220513+ds-4.1build2
+  lighttpd 1.4.74-1ubuntu3
+  nginx 1.24.0-2ubuntu7
+You should explicitly select one to install.
+
+E: Package 'httpd' has no installation candidate
+
+type this command -- sudo apt install apache2
+after first command type this command -----sudo systemctl start apache2
+To read all the dist file only first time type this command 
+sudo chmod 777 /var/www/html
+
+11) mention all the ports like backend port and front port and HTTP -port no 80 and SSH -port no -20 in the ec2 ->security group ->edit in bound rules ->add group  (mention port no, select any where fron Ipv4 ) and click on add
+12) copy the pubic ip of ec2 and check it in the browser.
+
+
+
+which jar is running backend command----- ps aux | grep java
+To kill the previous jar----kill -9 287897
+To see the jar -ls
+to run the latest jar -nohup java -jar payroll-06-12-2023-SNAPSHOT.jar &
+To see the error log-tail -f nohup.out
+----completed---------
+
+
+-----fortend  commands---
+To shift backend  directory to fortend directory - cd ..,cd fortend
+To delete the previous fortend  dist files command -sudo rm -rf *
+need to check deleted or not -ls
+need to go in /var/www/html/-cd /var/www/html/
+need to remove files in /var/www/html/ -sudo rm -rf*
+need to see the list -ls
+agin need to come in fortend folder cd
+cd he.coepd.com
+cd fortend
+need to drag and drop the files
+after drag and drop the dist files in fotend need to copy to /var/www/html/ --sudo cp -R /var/www/html/
+again need to check the copeid or not /var/www/html/ -ls
+To restart the fortend ---sudo systemctl restart nginx
