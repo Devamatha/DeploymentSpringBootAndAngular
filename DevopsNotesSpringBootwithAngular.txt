@@ -20,7 +20,7 @@ for FrontEnd -> 7) Copy the Public of the Ec2 instance and replace local host wi
 A. 1 step refrence video .https://youtu.be/gCTOitR31Eg?si=RCyZ_uQ7T7elUj3m.
 2.2)build a jar file of project of Backend
 
-A. step create a  build file in backend .
+A. step create a  build file in backend . command maven clean, click on maven build and in golas type like this clean package
 
 3.3) create a EC2 instance login  to EC2 using the Mobxtream (app).
 
